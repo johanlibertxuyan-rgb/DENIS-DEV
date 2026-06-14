@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EYAH ABATE DENIS PHARELL | Quantum Intelligence Core</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Urbanist:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* ─────────────────────────────────────────
+           TOKENS
+        ───────────────────────────────────────── */
+        :root {
+            --bg:          #080b14;
+            --bg-panel:    rgba(10, 14, 26, 0.82);
+            --border:      rgba(255, 255, 255, 0.07);
+            --border-glow: rgba(99, 179, 237, 0.35);
+            --cyan:        #63b3ed;
+            --purple:      #9f7aea;
+            --pink:        #ed64a6;
+            --text:        #cbd5e0;
+            --text-dim:    #4a5568;
+            --text-bright: #f7fafc;
+            --radius:      12px;
+            --transition:  0.28s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* ─────────────────────────────────────────
+           RESET & BASE
+        ───────────────────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg);
+            /* deep space gradient */
+            background-image:
+                radial-gradient(ellipse 90% 55% at 15%  5%,  rgba(49,  76, 163, 0.22) 0%, transparent 65%),
+                radial-gradient(ellipse 70% 45% at 85% 90%,  rgba(107, 33, 168, 0.18) 0%, transparent 60%),
+                radial-gradient(ellipse 55% 35% at 50% 48%,  rgba(15,  23,  42, 0.80) 0%, transparent 70%);
+            color: var(--text);
+            font-family: 'Urbanist', sans-serif;
+            font-size: 15px;
+            line-height: 1.65;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* subtle dot grid overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(rgba(255,255,255,0.035) 1px, transparent 1px);
+            background-size: 28px 28px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* top hairline accent */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                var(--cyan)   35%,
+                var(--purple) 65%,
+                transparent 100%);
+            opacity: 0.55;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        /* ambient orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(100px);
+            opacity: 0.55;
+        }
+        .orb-a {
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(49, 130, 206, 0.18), transparent 70%);
+            top: -180px; left: -150px;
+            animation: drift 18s ease-in-out infinite alternate;
+        }
+        .orb-b {
+            width: 480px; height: 480px;
+            background: radial-gradient(circle, rgba(128, 90, 213, 0.15), transparent 70%);
+            bottom: -100px; right: -120px;
+            animation: drift 24s ease-in-out infinite alternate-reverse;
+        }
+        @keyframes drift {
+            from { transform: translate(0,   0  ) scale(1);    }
+            to   { transform: translate(40px, 30px) scale(1.08); }
+        }
+
+        /* ─────────────────────────────────────────
+           LAYOUT HELPERS
+        ───────────────────────────────────────── */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section { position: relative; z-index: 1; }
+
+        .section-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 0;
+        }
+
+        /* ─────────────────────────────────────────
+           NAVIGATION
+        ───────────────────────────────────────── */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            height: 64px;
+            background: rgba(8, 11, 20, 0.78);
+            backdrop-filter: blur(20px) saturate(160%);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 13px;
+            letter-spacing: 0.2em;
+            color: var(--text-bright);
+            text-transform: uppercase;
+        }
+
+        .nav-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--cyan);
+            box-shadow: 0 0 8px var(--cyan);
+            animation: pulse 2.4s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1);   }
+            50%       { opacity: .5; transform: scale(.85); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            font-size: 16px;
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+        .nav-links a:hover { color: var(--text-bright); }
+
+        /* ─────────────────────────────────────────
+           HERO
+        ───────────────────────────────────────── */
+        .hero {
+            min-height: 62vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 24px 64px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border: 1px solid rgba(237, 100, 166, 0.3);
+            background: rgba(237, 100, 166, 0.06);
+            border-radius: 999px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--pink);
+            margin-bottom: 28px;
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: clamp(2.4rem, 7vw, 6rem);
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            color: var(--text-bright);
+            text-transform: uppercase;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, var(--cyan) 0%, var(--purple) 50%, var(--pink) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ─────────────────────────────────────────
+           SPEC PANEL
+        ───────────────────────────────────────── */
+        .spec-panel {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            backdrop-filter: blur(24px);
+            padding: 28px 32px;
+            margin: 0 0 80px;
+        }
+
+        .spec-panel h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-bright);
+            margin-bottom: 14px;
+        }
+
+        .spec-panel p {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 13px;
+            color: var(--text);
+            line-height: 1.8;
+        }
+
+        /* ─────────────────────────────────────────
+           SECTION HEADINGS
+        ───────────────────────────────────────── */
+        .section-eyebrow {
+            display: block;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--pink);
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+            color: var(--text-bright);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        /* ─────────────────────────────────────────
+           CARDS (book vault + pricing)
+        ───────────────────────────────────────── */
+        .card {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            backdrop-filter: blur(20px);
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+        }
+
+        .card:hover {
+            border-color: var(--border-glow);
+            box-shadow: 0 8px 40px rgba(99, 179, 237, 0.10), 0 2px 8px rgba(0,0,0,0.4);
+            transform: translateY(-3px);
+        }
+
+        .card-eyebrow {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+        }
+
+        .card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 1rem;
+            color: var(--pink);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .card-quote {
+            font-size: 13px;
+            font-style: italic;
+            color: var(--text);
+            line-height: 1.7;
+            flex: 1;
+        }
+
+        /* ─────────────────────────────────────────
+           PRICING CARDS
+        ───────────────────────────────────────── */
+        .price-card {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            backdrop-filter: blur(20px);
+            padding: 28px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+        }
+
+        .price-card:hover {
+            border-color: var(--border-glow);
+            box-shadow: 0 8px 40px rgba(99, 179, 237, 0.10);
+            transform: translateY(-3px);
+        }
+
+        .price-card.featured {
+            border-color: rgba(159, 122, 234, 0.4);
+            background: rgba(159, 122, 234, 0.06);
+        }
+
+        .price-card-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-bright);
+        }
+
+        .price-card-desc {
+            font-size: 13px;
+            color: var(--text);
+            flex: 1;
+        }
+
+        .price-tag {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 15px;
+            font-weight: 700;
+            text-align: right;
+        }
+        .price-tag.cyan   { color: var(--cyan);   }
+        .price-tag.purple { color: var(--purple);  }
+        .price-tag.white  { color: var(--text-bright); }
+
+        /* ─────────────────────────────────────────
+           MODAL
+        ───────────────────────────────────────── */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.88);
+            backdrop-filter: blur(10px);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .modal-overlay.hidden { display: none; }
+
+        .modal-box {
+            background: rgba(10, 14, 26, 0.97);
+            border: 1px solid rgba(159, 122, 234, 0.4);
+            border-radius: var(--radius);
+            width: 100%;
+            max-width: 640px;
+            padding: 32px;
+            box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 20px;
+        }
+
+        .modal-category {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            color: var(--pink);
+            text-transform: uppercase;
+        }
+
+        .modal-close {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11px;
+            color: var(--text-dim);
+            background: none;
+            border: none;
+            cursor: pointer;
+            letter-spacing: 0.1em;
+            transition: color var(--transition);
+        }
+        .modal-close:hover { color: var(--text-bright); }
+
+        .modal-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-bright);
+            margin-bottom: 16px;
+        }
+
+        .modal-body {
+            background: rgba(0,0,0,0.35);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            max-height: 280px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .modal-body p {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 12.5px;
+            color: var(--text);
+            line-height: 1.9;
+            white-space: pre-line;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-id {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            color: var(--text-dim);
+        }
+
+        /* ─────────────────────────────────────────
+           CONTACT SECTION
+        ───────────────────────────────────────── */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid { grid-template-columns: 1fr; }
+            .hero-title { font-size: 2.2rem; }
+        }
+
+        .contact-info-title {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 2rem;
+            text-transform: uppercase;
+            color: var(--text-bright);
+            margin-bottom: 12px;
+            letter-spacing: 0.04em;
+        }
+
+        .contact-info-sub {
+            font-size: 13px;
+            color: var(--text-dim);
+            margin-bottom: 24px;
+        }
+
+        .info-chip {
+            padding: 13px 16px;
+            background: rgba(0,0,0,0.35);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .info-chip.green { color: #68d391; }
+        .info-chip.dim   { color: var(--text); }
+
+        .social-label {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 12px;
+            margin-top: 24px;
+        }
+
+        .social-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-btn {
+            width: 42px; height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 15px;
+            text-decoration: none;
+            transition: border-color var(--transition), color var(--transition), transform var(--transition);
+        }
+        .social-btn:hover { transform: translateY(-2px); }
+        .social-btn.ig   { color: #f06292; }
+        .social-btn.ig:hover   { border-color: #f06292; }
+        .social-btn.fb   { color: #63b3ed; }
+        .social-btn.fb:hover   { border-color: #63b3ed; }
+        .social-btn.tw   { color: var(--text); }
+        .social-btn.tw:hover   { border-color: var(--text-bright); color: var(--text-bright); }
+
+        /* ─────────────────────────────────────────
+           FORM
+        ───────────────────────────────────────── */
+        .form-panel {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            backdrop-filter: blur(24px);
+            padding: 32px;
+        }
+
+        .form-panel-header {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--cyan);
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+
+        .form-group { margin-bottom: 20px; }
+
+        .form-label {
+            display: block;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 8px;
+        }
+
+        .form-label i { margin-right: 6px; }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.45);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 13px 16px;
+            color: var(--text-bright);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 13px;
+            outline: none;
+            transition: border-color var(--transition), box-shadow var(--transition);
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder { color: rgba(255,255,255,0.18); }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            border-color: var(--purple);
+            box-shadow: 0 0 0 3px rgba(159, 122, 234, 0.12);
+        }
+
+        .form-textarea { resize: vertical; min-height: 120px; }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #6b46c1 0%, #d53f8c 100%);
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: opacity var(--transition), transform var(--transition), box-shadow var(--transition);
+            box-shadow: 0 4px 20px rgba(107, 70, 193, 0.35);
+        }
+
+        .btn-submit:hover {
+            opacity: 0.92;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 28px rgba(107, 70, 193, 0.50);
+        }
+
+        .btn-submit:active { transform: translateY(0); }
+
+        .btn-extract {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(159, 122, 234, 0.4);
+            border-radius: 8px;
+            background: rgba(107, 70, 193, 0.18);
+            color: #c4b5fd;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background var(--transition), border-color var(--transition), transform var(--transition);
+        }
+        .btn-extract:hover {
+            background: rgba(107, 70, 193, 0.32);
+            border-color: rgba(159, 122, 234, 0.7);
+            transform: translateY(-1px);
+        }
+
+        .btn-order {
+            padding: 11px 20px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #6b46c1, #d53f8c);
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: opacity var(--transition);
+        }
+        .btn-order:hover { opacity: 0.85; }
+
+        .form-status {
+            margin-top: 14px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            white-space: pre-line;
+        }
+        .form-status.success { background: rgba(72,187,120,0.08); border: 1px solid rgba(72,187,120,0.3); color: #68d391; }
+        .form-status.error   { background: rgba(245, 101, 101,0.08); border: 1px solid rgba(245,101,101,0.3); color: #fc8181; }
+        .form-status.hidden  { display: none; }
+
+        /* ─────────────────────────────────────────
+           GRIDS
+        ───────────────────────────────────────── */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        @media (max-width: 900px) { .grid-3 { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 600px) { .grid-3 { grid-template-columns: 1fr; } }
+
+        /* ─────────────────────────────────────────
+           FOOTER
+        ───────────────────────────────────────── */
+        .footer {
+            padding: 32px 24px;
+            text-align: center;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            color: var(--text-dim);
+            border-top: 1px solid var(--border);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ─────────────────────────────────────────
+           UTILITIES
+        ───────────────────────────────────────── */
+        .mt-80 { margin-top: 80px; }
+        .mb-12 { margin-bottom: 48px; }
+        .py-section { padding: 80px 0; }
+
+        strong.c { color: var(--text-bright); }
+        strong.cy { color: var(--cyan); }
+        strong.pk { color: var(--pink); }
+
+        /* scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+    </style>
+</head>
+<body>
+
+    <!-- Ambient orbs -->
+    <div class="orb orb-a"></div>
+    <div class="orb orb-b"></div>
+
+    <!-- NAV -->
+    <nav class="nav">
+        <div class="nav-brand">
+            <div class="nav-dot"></div>
+            MR. ABATE DENIS
+        </div>
+        <ul class="nav-links">
+            <li><a href="https://instagram.com/trillion.code" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+            <li><a href="#" target="_blank"><i class="fa-brands fa-facebook"></i></a></li>
+            <li><a href="#" target="_blank"><i class="fa-brands fa-x-twitter"></i></a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-badge">[ SWARM INSECT ROBOTS INTERNAL CONTROL CORE LAYER ]</div>
+        <h1 class="hero-title">
+            EYAH ABATE<br>
+            <span>DENIS PHARELL</span>
+        </h1>
+    </section>
+
+    <!-- SPEC -->
+    <div class="container">
+        <div class="spec-panel">
+            <h3>// SPECIFICATIONS ET FINALITÉ DU SITE DE L'HÔTE</h3>
+            <p>
+                Ce mainframe constitue l'écosystème numérique central de <strong class="c">Monsieur Abate Denis</strong>.
+                Il héberge et exécute automatiquement trois couches applicatives : la vitrine commerciale des
+                <strong class="cy">offres de serveurs et d'ingénierie automatisée (Bots)</strong>, le coffre-fort
+                d'interception d'extraits pour le chef-d'œuvre littéraire
+                <strong class="pk">« Ma Réalité est Pire que l'Enfer »</strong>, et le protocole de communication
+                asynchrone sécurisé pour capturer les requêtes client sans défaillance matérielle.
+            </p>
+        </div>
+    </div>
+
+    <!-- BOOK VAULT -->
+    <hr class="section-divider">
+    <section class="py-section">
+        <div class="container">
+            <div class="mb-12" style="text-align:center">
+                <span class="section-eyebrow">// Base de données de cryptage philosophique</span>
+                <h2 class="section-title">Éditions & Coffre-Fort de Maximes</h2>
+            </div>
+            <div class="grid-3" id="literary-grid"></div>
+        </div>
+    </section>
+
+    <!-- MODAL -->
+    <div id="quantum-modal" class="modal-overlay hidden">
+        <div class="modal-box">
+            <div class="modal-header">
+                <span id="modal-category" class="modal-category"></span>
+                <button class="modal-close" onclick="closeQuantumVault()">[ FERMER ]</button>
+            </div>
+            <h3 id="modal-title" class="modal-title"></h3>
+            <div class="modal-body">
+                <p id="modal-content"></p>
+            </div>
+            <div class="modal-footer">
+                <span class="modal-id">ID: SECURE_CORE_AUTHOR</span>
+                <a href="https://wa.me/237690612024" target="_blank" class="btn-order">COMMANDER L'ÉDITION COMPLÈTE</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRICING -->
+    <hr class="section-divider">
+    <section class="py-section">
+        <div class="container">
+            <div class="mb-12" style="text-align:center">
+                <span class="section-eyebrow">// Tarification des protocoles</span>
+                <h2 class="section-title">Offres & Services</h2>
+            </div>
+            <div class="grid-3">
+                <div class="price-card">
+                    <div class="price-card-name">Protocole Abate</div>
+                    <p class="price-card-desc">Bots h24 autonomes (WhatsApp / Telegram).</p>
+                    <div class="price-tag white">30 000 FCFA</div>
+                </div>
+                <div class="price-card featured">
+                    <div class="price-card-name">Souverain Core</div>
+                    <p class="price-card-desc">Création de portfolios et infrastructures Cloud élites.</p>
+                    <div class="price-tag purple">50 000 FCFA</div>
+                </div>
+                <div class="price-card">
+                    <div class="price-card-name">Global Custom</div>
+                    <p class="price-card-desc">Systèmes automatisés massifs interconnectés.</p>
+                    <div class="price-tag cyan">SUR DEVIS</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <hr class="section-divider">
+    <section class="py-section">
+        <div class="container">
+            <div class="contact-grid">
+
+                <!-- Info -->
+                <div>
+                    <h2 class="contact-info-title">Data Transmission</h2>
+                    <p class="contact-info-sub">Vos messages arrivent directement sur WhatsApp en temps réel.</p>
+                    <div class="info-chip dim">johanlibertxuyan@gmail.com</div>
+                    <div class="info-chip green">+237 690 612 024</div>
+                    <p class="social-label">// Secure Social Channels</p>
+                    <div class="social-row">
+                        <a href="https://instagram.com/trillion.code" target="_blank" class="social-btn ig"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" target="_blank" class="social-btn fb"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" target="_blank" class="social-btn tw"><i class="fa-brands fa-x-twitter"></i></a>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <div class="form-panel">
+                    <div class="form-panel-header">// Protocole de Transmission Sécurisée</div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fa-solid fa-user" style="color:#9f7aea"></i> Votre Nom Complet *
+                        </label>
+                        <input type="text" id="field-name" placeholder="Ex: Jean Dupont" class="form-input">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fa-solid fa-message" style="color:#ed64a6"></i> Votre Message *
+                        </label>
+                        <textarea id="field-message" placeholder="Décrivez votre projet, vos besoins, votre budget..." class="form-textarea"></textarea>
+                    </div>
+
+                    <button onclick="envoyerWhatsApp()" class="btn-submit">
+                        <i class="fa-brands fa-whatsapp" style="margin-right:8px"></i> Envoyer le Message
+                    </button>
+
+                    <div id="form-status" class="form-status hidden"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        EXECUTION HOST: EYAH ABATE DENIS PHARELL — SYSTEMS © 2026
+    </footer>
+
+    <script>
+        // ── LITERARY DATABASE ──────────────────────────────
+        const LITERARY_DATABASE = [
+            {
+                title: "Ma Réalité est Pire que l'Enfer",
+                quote: "« Le paradis n'est qu'un script parfait exécuté dans une matrice humaine en ruine. »",
+                category: "EDITION_MAITRESSE_01",
+                fullText: "« Il y avait cette pièce vide, éclairée par le reflet bleu d'un écran terminal. À l'intérieur, un esprit concevait des mondes algorithmiques parfaits, où chaque variable obéissait sans faillir. Mais en franchissant le pas de la porte, le monde physique s'effondrait sous le poids des trahisons, de la lenteur humaine et de l'incohérence.\n\nC'est là que réside la véritable tristesse : s'apercevoir que l'on a bâti un paradis de lignes de codes invisibles, tout en étant condamné à marcher dans un monde réel qui n'est qu'un enfer mal programmé. »"
+            },
+            {
+                title: "L'Architecture du Silence",
+                quote: "« Ne parlez jamais pour convaincre. Laissez vos systèmes s'exécuter à votre place. »",
+                category: "STRATEGIE_MENTALE_02",
+                fullText: "« Le plus grand piège de l'esprit est de chercher la validation auprès de ceux qui sont incapables de comprendre la structure de votre silence. Ne parlez jamais pour convaincre des esprits inférieurs.\n\nConseil Souverain : Pour dominer une situation de crise, ne cherchez pas à contrôler les gens. Contrôlez l'infrastructure et l'accès à l'information dont ils ont impérativement besoin pour exister au quotidien. Celui qui détient le canal de transmission détient le pouvoir absolu. »"
+            },
+            {
+                title: "L'Illusion du Choix",
+                quote: "« En comprenant l'architecture psychologique d'une cible, ses actions deviennent prévisibles. »",
+                category: "COGNITION_SOMBRE_03",
+                fullText: "« Les hommes croient prendre des décisions basées sur leur libre arbitre, alors qu'ils ne font que réagir aux stimuli injectés dans leur flux d'informations. En comprenant l'architecture psychologique d'une cible, ses actions futures deviennent aussi prévisibles qu'un script Node.js en boucle fermée. Pour être véritablement dangereux et insaisissable, vous devez éradiquer vos propres habitudes. Devenez une anomalie indétectable dans le système. »"
+            }
+        ];
+
+        const grid = document.getElementById('literary-grid');
+        LITERARY_DATABASE.forEach((book, i) => {
+            const el = document.createElement('div');
+            el.className = 'card';
+            el.innerHTML = `
+                <div class="card-eyebrow">Format Broché &amp; Numérique</div>
+                <div class="card-title">${book.title}</div>
+                <p class="card-quote">${book.quote}</p>
+                <button class="btn-extract" onclick="openQuantumVault(${i})">Lire un extrait</button>
+            `;
+            grid.appendChild(el);
+        });
+
+        function openQuantumVault(index) {
+            const d = LITERARY_DATABASE[index];
+            document.getElementById('modal-category').textContent = `// ARCHIVE PROTOCOLE: ${d.category}`;
+            document.getElementById('modal-title').textContent = d.title;
+            document.getElementById('modal-content').textContent = d.fullText;
+            document.getElementById('quantum-modal').classList.remove('hidden');
+        }
+
+        function closeQuantumVault() {
+            document.getElementById('quantum-modal').classList.add('hidden');
+        }
+
+        // ── WHATSAPP SEND ──────────────────────────────────
+        function envoyerWhatsApp() {
+            const name    = document.getElementById('field-name').value.trim();
+            const message = document.getElementById('field-message').value.trim();
+            const status  = document.getElementById('form-status');
+
+            status.className = 'form-status hidden';
+
+            if (!name || !message) {
+                status.textContent = '>> ERREUR : Nom et message sont obligatoires.';
+                status.className = 'form-status error';
+                return;
+            }
+
+            const waText = `Bonjour *M. Abate Denis,*\nJe m'appelle *${name}*.\n\n*Message :*\n${message}`;
+            window.open(`https://wa.me/237690612024?text=${encodeURIComponent(waText)}`, '_blank');
+
+            status.textContent = '>> ✅ REDIRECTION VERS WHATSAPP...';
+            status.className = 'form-status success';
+
+            setTimeout(() => {
+                document.getElementById('field-name').value = '';
+                document.getElementById('field-message').value = '';
+                status.className = 'form-status hidden';
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
