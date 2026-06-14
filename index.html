@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EYAH ABATE DENIS PHARELL | Quantum Intelligence Core</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Urbanist:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --matrix-black: #010103;
+            --neon-cyan: #00f3ff;
+            --neon-magenta: #ff0055;
+            --quantum-green: #39ff14;
+        }
+
+        body {
+            background-color: var(--matrix-black);
+            color: #e2e8f0;
+            font-family: 'Urbanist', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, transparent, var(--neon-cyan), var(--neon-magenta), transparent);
+            box-shadow: 0 0 30px var(--neon-cyan), 0 0 10px var(--neon-magenta);
+            animation: laserScanVertical 4s infinite linear;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        @keyframes laserScanVertical {
+            0% { top: 0%; opacity: 0; }
+            5% { opacity: 1; }
+            95% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        .cyber-drone-alpha {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+            height: 2px; width: 350px;
+            animation: droneFlightX 6s infinite cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            opacity: 0.6;
+        }
+        .cyber-drone-beta {
+            position: absolute;
+            background: linear-gradient(180deg, transparent, var(--neon-magenta), transparent);
+            width: 2px; height: 350px;
+            animation: droneFlightY 9s infinite linear;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        @keyframes droneFlightX { 0% { left: -350px; top: 15%; } 50% { left: 100%; top: 55%; } 100% { left: -350px; top: 85%; } }
+        @keyframes droneFlightY { 0% { top: -350px; right: 20%; } 50% { top: 100%; right: 60%; } 100% { top: -350px; right: 40%; } }
+
+        .cyber-panel {
+            background: rgba(4, 5, 9, 0.93);
+            border: 1px solid rgba(0, 243, 255, 0.15);
+            backdrop-filter: blur(25px);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .cyber-panel:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 35px rgba(0, 243, 255, 0.25);
+        }
+
+        .space-grid {
+            background-image: linear-gradient(rgba(0, 243, 255, 0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 243, 255, 0.015) 1px, transparent 1px);
+            background-size: 45px 45px;
+        }
+
+        .btn-gradient-submit {
+            background: linear-gradient(90deg, #9d4edd, #ff007f);
+            color: white;
+            transition: opacity 0.2s ease;
+            cursor: pointer;
+        }
+        .btn-gradient-submit:hover { opacity: 0.85; }
+        .btn-gradient-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .btn-extract-purple {
+            background-color: #8a2be2;
+            color: white;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        .btn-extract-purple:hover { background-color: #7b1fa2; transform: scale(1.02); }
+
+        /* Form input focus styles */
+        .cyber-input {
+            width: 100%;
+            background: rgba(0,0,0,0.8);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 12px;
+            color: white;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 12px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .cyber-input:focus {
+            border-color: #9d4edd;
+            box-shadow: 0 0 10px rgba(157, 78, 221, 0.2);
+        }
+        .cyber-input::placeholder {
+            color: rgba(255,255,255,0.2);
+        }
+
+        .cyber-label {
+            display: block;
+            color: #9ca3af;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+    </style>
+</head>
+<body class="space-grid antialiased select-none">
+
+    <div class="cyber-drone-alpha"></div>
+    <div class="cyber-drone-beta"></div>
+
+    <nav class="fixed top-0 w-full bg-[#010103]/95 border-b border-[#00f3ff]/20 z-50 px-6 py-4 flex justify-between items-center backdrop-blur-md">
+        <div class="flex items-center space-x-3">
+            <div class="w-3 h-3 rounded-full bg-cyan-400 animate-pulse"></div>
+            <span class="font-['Orbitron'] font-black tracking-widest text-sm text-white">MR. ABATE DENIS</span>
+        </div>
+        <div class="flex space-x-4 text-gray-400 text-sm">
+            <a href="https://instagram.com/trillion.code" target="_blank" class="hover:text-pink-500 transition-colors"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" target="_blank" class="hover:text-blue-600 transition-colors"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" target="_blank" class="hover:text-cyan-400 transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+    </nav>
+
+    <section id="home" class="min-h-[60vh] flex flex-col justify-center items-center px-4 relative pt-24">
+        <div class="text-center z-10 space-y-4 max-w-5xl">
+            <div class="inline-flex items-center space-x-2 px-3 py-1 bg-pink-950/20 border border-pink-500/30 font-['Share_Tech_Mono'] text-[11px] text-pink-400 tracking-widest">
+                <span>[ SWARM INSECT ROBOTS INTERNAL CONTROL CORE LAYER ]</span>
+            </div>
+            <h1 class="font-['Orbitron'] text-5xl md:text-8xl font-black uppercase tracking-tighter text-white leading-none">
+                EYAH ABATE <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500">DENIS PHARELL</span>
+            </h1>
+        </div>
+    </section>
+
+    <section class="py-12 px-4 max-w-5xl mx-auto">
+        <div class="cyber-panel p-6 border border-cyan-500/20 bg-cyan-950/5 font-['Share_Tech_Mono'] text-xs md:text-sm">
+            <h3 class="font-['Orbitron'] font-bold text-white mb-4 uppercase tracking-wider">// SPECIFICATIONS ET FINALITÉ DU SITE DE L'HÔTE</h3>
+            <p class="text-gray-400 leading-relaxed">
+                Ce mainframe constitue l'écosystème numérique central de <strong class="text-white">Monsieur Abate Denis</strong>. Il héberge et exécute automatiquement trois couches applicatives : la vitrine commerciale des <strong class="text-cyan-400">offres de serveurs et d'ingénierie automatisée (Bots)</strong>, le coffre-fort d'interception d'extraits pour le chef-d'œuvre littéraire <strong class="text-pink-400">« Ma Réalité est Pire que l'Enfer »</strong>, et le protocole de communication asynchrone sécurisé pour capturer les requêtes client sans défaillance matérielle.
+            </p>
+        </div>
+    </section>
+
+    <section id="book-vault" class="py-16 px-4 max-w-6xl mx-auto border-t border-cyan-500/10">
+        <div class="text-center mb-12">
+            <span class="font-['Share_Tech_Mono'] text-xs text-pink-500 tracking-widest uppercase">// BASE DE DONNÉES DE CRYPTAGE PHILOSOPHIQUE</span>
+            <h2 class="font-['Orbitron'] text-3xl md:text-4xl font-black text-white uppercase mt-1">ÉDITIONS & COFFRE-FORT DE MAXIMES</h2>
+        </div>
+        <div id="literary-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </section>
+
+    <div id="quantum-modal" class="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4 hidden">
+        <div class="cyber-panel w-full max-w-2xl p-6 border-2 border-purple-500 bg-[#040509]">
+            <div class="flex justify-between items-center border-b border-white/10 pb-3 mb-4">
+                <span id="modal-category" class="font-['Share_Tech_Mono'] text-[10px] text-pink-500 tracking-widest"></span>
+                <button onclick="closeQuantumVault()" class="text-gray-500 hover:text-white font-['Share_Tech_Mono'] text-xs">[ FERMER ]</button>
+            </div>
+            <h3 id="modal-title" class="font-['Orbitron'] text-xl font-bold text-white uppercase mb-3"></h3>
+            <div class="bg-black/50 border border-white/5 p-4 rounded mb-4 max-h-[300px] overflow-y-auto">
+                <p id="modal-content" class="font-['Share_Tech_Mono'] text-gray-300 text-xs md:text-sm leading-relaxed whitespace-pre-line"></p>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="font-['Share_Tech_Mono'] text-[10px] text-gray-600">ID: SECURE_CORE_AUTHOR</span>
+                <a href="https://wa.me/237690612024" target="_blank" class="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-['Orbitron'] font-bold text-[10px] uppercase tracking-wider">COMMANDER L'ÉDITION COMPLETE</a>
+            </div>
+        </div>
+    </div>
+
+    <section id="pricing" class="py-16 px-4 max-w-6xl mx-auto border-t border-cyan-500/10 font-['Share_Tech_Mono'] text-xs">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="cyber-panel p-6">
+                <h4 class="font-['Orbitron'] font-bold text-white text-sm uppercase mb-2">Protocole Abate</h4>
+                <p class="text-gray-400 mb-4">Bots h24 autonomes (WhatsApp/Telegram).</p>
+                <div class="text-right text-white font-bold">30 000 FCFA</div>
+            </div>
+            <div class="cyber-panel p-6 border-pink-500/30">
+                <h4 class="font-['Orbitron'] font-bold text-white text-sm uppercase mb-2">Souverain Core</h4>
+                <p class="text-gray-400 mb-4">Création de portfolios et infrastructures Cloud élites.</p>
+                <div class="text-right text-pink-500 font-bold">50 000 FCFA</div>
+            </div>
+            <div class="cyber-panel p-6">
+                <h4 class="font-['Orbitron'] font-bold text-white text-sm uppercase mb-2">Global Custom</h4>
+                <p class="text-gray-400 mb-4">Systèmes automatisés massifs interconnectés.</p>
+                <div class="text-right text-cyan-400 font-bold">SUR DEVIS</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="terminal" class="py-16 px-4 max-w-6xl mx-auto border-t border-cyan-500/10">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="space-y-4 font-['Share_Tech_Mono'] text-xs">
+                <h2 class="font-['Orbitron'] text-3xl font-black text-white uppercase">DATA TRANSMISSION</h2>
+                <p class="text-gray-500">Formulaire sécurisé — vos messages arrivent directement dans ma boîte Gmail.</p>
+                <div class="bg-black/40 p-4 border border-white/5 text-gray-300">johanlibertxuyan@gmail.com</div>
+                <div class="bg-black/40 p-4 border border-white/5 text-green-400">+237 690 612 024</div>
+                
+                <div class="pt-4 border-t border-white/10 space-y-2">
+                    <p class="text-gray-400 uppercase tracking-widest text-[10px]">// SECURE_SOCIAL_CHANNELS</p>
+                    <div class="flex space-x-3 text-sm">
+                        <a href="https://instagram.com/trillion.code" target="_blank" class="p-3 bg-black border border-white/10 text-pink-500 hover:border-pink-500 transition-all rounded-md"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" target="_blank" class="p-3 bg-black border border-white/10 text-blue-500 hover:border-blue-500 transition-all rounded-md"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" target="_blank" class="p-3 bg-black border border-white/10 text-cyan-400 hover:border-cyan-400 transition-all rounded-md"><i class="fa-brands fa-x-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FORMULAIRE DE CONTACT -->
+            <div class="cyber-panel p-6">
+                <div class="mb-5 pb-3 border-b border-white/10">
+                    <span class="font-['Share_Tech_Mono'] text-[10px] text-cyan-400 tracking-widest uppercase">// PROTOCOLE DE TRANSMISSION SÉCURISÉE</span>
+                </div>
+
+                <form id="cyber-form" class="space-y-4">
+
+                    <!-- Nom -->
+                    <div>
+                        <label class="cyber-label">
+                            <i class="fa-solid fa-user mr-1 text-purple-400"></i> Votre Nom Complet *
+                        </label>
+                        <input
+                            type="text"
+                            id="field-name"
+                            name="name"
+                            required
+                            placeholder="Ex: Jean Dupont"
+                            class="cyber-input"
+                        >
+                    </div>
+
+                    <!-- Gmail -->
+                    <div>
+                        <label class="cyber-label">
+                            <i class="fa-brands fa-google mr-1 text-red-400"></i> Votre Adresse Gmail *
+                        </label>
+                        <input
+                            type="email"
+                            id="field-email"
+                            name="email"
+                            required
+                            placeholder="votre.adresse@gmail.com"
+                            class="cyber-input"
+                        >
+                        <p class="font-['Share_Tech_Mono'] text-[9px] text-gray-600 mt-1">→ Utilisée pour vous répondre uniquement</p>
+                    </div>
+
+                    <!-- Sujet / Type de demande -->
+                    <div>
+                        <label class="cyber-label">
+                            <i class="fa-solid fa-tag mr-1 text-cyan-400"></i> Type de Demande *
+                        </label>
+                        <select
+                            id="field-subject"
+                            name="subject"
+                            required
+                            class="cyber-input"
+                            style="cursor:pointer;"
+                        >
+                            <option value="" disabled selected style="color:#555;">-- Sélectionnez --</option>
+                            <option value="Bot WhatsApp/Telegram – Protocole Abate (30 000 FCFA)">🤖 Bot WhatsApp/Telegram – 30 000 FCFA</option>
+                            <option value="Portfolio & Cloud – Souverain Core (50 000 FCFA)">☁️ Portfolio & Cloud – 50 000 FCFA</option>
+                            <option value="Système Custom – Global (Sur Devis)">⚙️ Système Custom – Sur Devis</option>
+                            <option value="Commande Livre – Ma Réalité est Pire que l'Enfer">📖 Commander le Livre</option>
+                            <option value="Autre demande">💬 Autre demande</option>
+                        </select>
+                    </div>
+
+                    <!-- Message -->
+                    <div>
+                        <label class="cyber-label">
+                            <i class="fa-solid fa-message mr-1 text-pink-400"></i> Votre Message *
+                        </label>
+                        <textarea
+                            id="field-message"
+                            name="message"
+                            required
+                            rows="4"
+                            placeholder="Décrivez votre projet, vos besoins, votre budget..."
+                            class="cyber-input"
+                            style="resize: vertical;"
+                        ></textarea>
+                    </div>
+
+                    <!-- Numéro WhatsApp (optionnel) -->
+                    <div>
+                        <label class="cyber-label">
+                            <i class="fa-brands fa-whatsapp mr-1 text-green-400"></i> Numéro WhatsApp <span class="text-gray-600">(optionnel)</span>
+                        </label>
+                        <input
+                            type="tel"
+                            id="field-phone"
+                            name="whatsapp"
+                            placeholder="+237 6XX XXX XXX"
+                            class="cyber-input"
+                        >
+                    </div>
+
+                    <!-- Bouton Envoyer -->
+                    <button
+                        type="submit"
+                        id="submit-btn"
+                        class="w-full py-3 rounded-md font-['Orbitron'] font-bold text-xs uppercase tracking-widest btn-gradient-submit"
+                    >
+                        <i class="fa-solid fa-paper-plane mr-2"></i> ENVOYER LE MESSAGE
+                    </button>
+
+                    <!-- Statut -->
+                    <div id="form-status" class="hidden p-3 font-['Share_Tech_Mono'] text-[10px] uppercase tracking-wider border rounded"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-8 text-center text-gray-600 font-['Share_Tech_Mono'] text-[10px]">
+        EXECUTION HOST: EYAH ABATE DENIS PHARELL — SYSTEMS © 2026
+    </footer>
+
+    <script>
+        // ═══════════════════════════════════════════════
+        // BASE DE DONNÉES LITTÉRAIRE
+        // ═══════════════════════════════════════════════
+        const LITERARY_DATABASE = [
+            {
+                title: "Ma Réalité est Pire que l'Enfer",
+                quote: "« Le paradis n'est qu'un script parfait exécuté dans une matrice humaine en ruine. »",
+                category: "EDITION_MAITRESSE_01",
+                fullText: "« Il y avait cette pièce vide, éclairée par le reflet bleu d'un écran terminal. À l'intérieur, un esprit concevait des mondes algorithmiques parfaits, où chaque variable obéissait sans faillir. Mais en franchissant le pas de la porte, le monde physique s'effondrait sous le poids des trahisons, de la lenteur humaine et de l'incohérence.\n\nC'est là que réside la véritable tristesse : s'apercevoir que l'on a bâti un paradis de lignes de codes invisibles, tout en étant condamné à marcher dans un monde réel qui n'est qu'un enfer mal programmé. »"
+            },
+            {
+                title: "L'Architecture du Silence",
+                quote: "« Ne parlez jamais pour convaincre. Laissez vos systèmes s'exécuter à votre place. »",
+                category: "STRATEGIE_MENTALE_02",
+                fullText: "« Le plus grand piège de l'esprit est de chercher la validation auprès de ceux qui sont incapables de comprendre la structure de votre silence. Ne parlez jamais pour convaincre des esprits inférieurs.\n\nConseil Souverain : Pour dominer une situation de crise, ne cherchez pas à contrôler les gens. Contrôlez l'infrastructure et l'accès à l'information dont ils ont impérativement besoin pour exister au quotidien. Celui qui détient le canal de transmission détient le pouvoir absolu. »"
+            },
+            {
+                title: "L'Illusion du Choix",
+                quote: "« En comprenant l'architecture psychologique d'une cible, ses actions deviennent prévisibles. »",
+                category: "COGNITION_SOMBRE_03",
+                fullText: "« Les hommes croient prendre des décisions basées sur leur libre arbitre, alors qu'ils ne font que réagir aux stimuli injectés dans leur flux d'informations. En comprenant l'architecture psychologique d'une cible, ses actions futures deviennent aussi prévisibles qu'un script Node.js en boucle fermée. Pour être véritablement dangereux et insaisissable, vous devez éradiquer vos propres habitudes. Devenez une anomalie indétectable dans le système. »"
+            }
+        ];
+
+        const grid = document.getElementById('literary-grid');
+        LITERARY_DATABASE.forEach((book, index) => {
+            grid.innerHTML += `
+                <div class="cyber-panel p-6 flex flex-col justify-between space-y-4 border border-white/5 bg-[#0b0c10]/60 rounded-lg">
+                    <div class="text-center space-y-2 font-['Share_Tech_Mono']">
+                        <p class="text-gray-500 text-[11px] tracking-wider">Format Broché & Numérique</p>
+                        <h4 class="font-['Orbitron'] font-black text-pink-500 uppercase text-lg tracking-wide">${book.title}</h4>
+                        <p class="text-gray-400 text-xs italic mt-2 min-h-[40px] flex items-center justify-center">${book.quote}</p>
+                    </div>
+                    <button onclick="openQuantumVault(${index})" class="w-full py-3 rounded-md font-['Share_Tech_Mono'] text-xs font-bold uppercase tracking-widest btn-extract-purple">LIRE UN EXTRAIT</button>
+                </div>
+            `;
+        });
+
+        function openQuantumVault(index) {
+            const data = LITERARY_DATABASE[index];
+            document.getElementById('modal-category').innerText = `// ARCHIVE PROTOCOLE: ${data.category}`;
+            document.getElementById('modal-title').innerText = data.title;
+            document.getElementById('modal-content').innerText = data.fullText;
+            document.getElementById('quantum-modal').classList.remove('hidden');
+        }
+
+        function closeQuantumVault() {
+            document.getElementById('quantum-modal').classList.add('hidden');
+        }
+
+        // ═══════════════════════════════════════════════
+        // FORMULAIRE → FORMSPREE → GMAIL
+        // ═══════════════════════════════════════════════
+        const FORMSPREE_ENDPOINT = "https://formspree.io/f/xoqggyen";
+        // ↑ Remplacez xoqggyen par votre vrai ID Formspree si nécessaire
+
+        const form = document.getElementById('cyber-form');
+        const statusDiv = document.getElementById('form-status');
+        const btn = document.getElementById('submit-btn');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Validation basique
+            const name    = document.getElementById('field-name').value.trim();
+            const email   = document.getElementById('field-email').value.trim();
+            const subject = document.getElementById('field-subject').value;
+            const message = document.getElementById('field-message').value.trim();
+
+            if (!name || !email || !subject || !message) {
+                showStatus('error', '>> ERREUR : Tous les champs obligatoires (*) doivent être remplis.');
+                return;
+            }
+
+            // Email validation rapide
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showStatus('error', '>> ERREUR : Adresse email invalide. Vérifiez votre Gmail.');
+                return;
+            }
+
+            // Envoi
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> TRANSMISSION EN COURS...';
+            showStatus('loading', '> Chiffrement et envoi du message vers le serveur central...');
+
+            try {
+                const formData = new FormData();
+                formData.append('name', name);
+                formData.append('email', email);
+                formData.append('_subject', `[SITE ABATE] ${subject} — de ${name}`);
+                formData.append('subject', subject);
+                formData.append('message', message);
+
+                const phone = document.getElementById('field-phone').value.trim();
+                if (phone) formData.append('whatsapp', phone);
+
+                // Timestamp
+                formData.append('_date', new Date().toLocaleString('fr-FR', { timeZone: 'Africa/Douala' }));
+
+                const response = await fetch(FORMSPREE_ENDPOINT, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    showStatus('success', '>> ✅ TRANSMISSION EFFECTUÉE AVEC SUCCÈS.\n>> Message reçu dans la boîte Gmail de M. Abate Denis.\n>> Vous recevrez une réponse sous 24h.');
+                    btn.innerHTML = '<i class="fa-solid fa-check mr-2"></i> MESSAGE ENVOYÉ';
+                    btn.style.background = 'linear-gradient(90deg, #065f46, #047857)';
+                    form.reset();
+
+                    // Reset bouton après 5s
+                    setTimeout(() => {
+                        btn.disabled = false;
+                        btn.innerHTML = '<i class="fa-solid fa-paper-plane mr-2"></i> ENVOYER LE MESSAGE';
+                        btn.style.background = '';
+                    }, 5000);
+                } else {
+                    const data = await response.json();
+                    throw new Error(data.error || 'Erreur serveur');
+                }
+            } catch (err) {
+                console.error('Formspree error:', err);
+                showStatus('error', '>> ⚠️ ÉCHEC DE TRANSMISSION.\n>> Redirection vers le canal WhatsApp souverain dans 2 secondes...');
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-paper-plane mr-2"></i> ENVOYER LE MESSAGE';
+
+                setTimeout(() => {
+                    const msg = encodeURIComponent(
+                        `Bonjour M. Abate Denis,\nJe m'appelle ${name}.\nDemande: ${subject}\n\nMessage: ${message}`
+                    );
+                    window.open(`https://wa.me/237690612024?text=${msg}`, '_blank');
+                }, 2000);
+            }
+        });
+
+        function showStatus(type, message) {
+            statusDiv.classList.remove('hidden', 'border-cyan-500', 'text-cyan-400', 'border-green-500', 'text-green-400', 'border-red-500', 'text-red-400');
+            statusDiv.style.whiteSpace = 'pre-line';
+
+            if (type === 'loading') {
+                statusDiv.classList.add('border-cyan-500', 'text-cyan-400');
+            } else if (type === 'success') {
+                statusDiv.classList.add('border-green-500', 'text-green-400');
+            } else if (type === 'error') {
+                statusDiv.classList.add('border-red-500', 'text-red-400');
+            }
+
+            statusDiv.textContent = message;
+        }
+    </script>
+</body>
+</html>
